@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+:root {
+  --base-color: #edf2f4;
+  --base-color-light: hsl(from var(--base-color) h s calc(l + 10));
+  --base-color-lighter: hsl(from var(--base-color) h s calc(l + 20));
+
+  --base-color-dark: hsl(from var(--base-color) h s calc(l - 5));
+  --base-color-darker: hsl(from var(--base-color) h s calc(l - 10));
+
+  --accent-color: #ef233c;
+  --accent-color-light: hsl(from var(--accent-color) h s calc(l + 10));
+  --accent-color-lighter: hsl(from var(--accent-color) h s calc(l + 20));
+
+  --accent-color-dark: hsl(from var(--accent-color) h s calc(l - 5));
+  --accent-color-darker: hsl(from var(--accent-color) h s calc(l - 10));
+
+  --text-color: #2b2d42
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  font-size: 16px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
