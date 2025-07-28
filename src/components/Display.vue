@@ -1,7 +1,18 @@
 <script setup>
   import Button from './ui/Button.vue';
-  import PasswordDisplay from './ui/PasswordDisplay.vue';
+  import { passwordGenerator } from './utils/helpers/passwordGenerator';
   import { Copy, RefreshCw, Key } from 'lucide-vue-next';
+  import { ref } from 'vue';
+
+  const password = ref('');
+
+  const generatePassword  = () => {
+    password.value = passwordGenerator();
+  }
+
+  const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(password.value);
+  }
 </script>
 
 <template>
@@ -17,18 +28,18 @@
     </div>
 
     <div class="password-container">
-      <form class="password-display">
-        <PasswordDisplay />
-      </form>
+      <div class="password-display">
+        <p>{{ password || 'No password generated yet' }}</p>
+      </div>
 
       <div class="button-row">
-        <Button class="copy-button">
+        <Button @click="copyToClipboard" class="copy-button">
           <Copy 
             :size="20"
           />
         </Button>
 
-        <Button class="generate-button">
+        <Button @click="generatePassword" class="generate-button">
           <RefreshCw
             color="#fff" 
             :size="20"
@@ -50,7 +61,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: var(--spacing-base);
+    padding: var(--spacing-lg);
+    padding-top: 0;
     border-radius: 25px;
     gap: var(--spacing-sm);
     justify-content: space-between;
@@ -59,7 +71,6 @@
 
   .display-header {
     padding: var(--spacing-lg);
-    padding-bottom: 0;
   }
 
   .display-header > h3 {
@@ -96,19 +107,40 @@
   }
 
   .generate-button {
-    background: var(--accent-color);
+    background: hsl(from var(--accent-color) h s l);
     transition: all 0.2s ease;
-  }
-
-  .generate-button:hover {
-    background: hsl(from var(--accent-color) h s calc(l - 10));
   }
 
   .copy-button {
     background: hsl(from var(--base-color-darker) h s l);
   }
 
+  .generate-button:hover {
+    background: hsl(from var(--accent-color) h s calc(l - 10));
+  }
+
+  .generate-button:active {
+    background: hsl(from var(--accent-color) h s calc(l - 20));
+    transform: scale(0.95);
+  }
+
   .copy-button:hover {
     background: hsl(from var(--base-color-darker) h s calc(l - 5));
+  }
+
+  .copy-button:active {
+    background: hsl(from var(base-color-darker) h s calc(l- 20));
+    transform: scale(0.95);
+  }
+
+  input {
+    border: none;
+    padding: var(--spacing-base);
+    background: var(--base-color);
+    width: 500px;
+  }
+
+  input:focus {
+    outline: none;
   }
 </style>

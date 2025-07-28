@@ -1,5 +1,9 @@
+<script setup>
+  defineEmits(['click']);
+</script>
+
 <template>
-  <button class="button">
+  <button class="button" @click="$emit('click')">
     <slot />
   </button>
 </template>
