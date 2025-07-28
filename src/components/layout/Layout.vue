@@ -23,8 +23,4 @@
     flex-direction: column;
     align-items: center;
   }
-
-  main {
-    flex: 1;
-  }
 </style>
