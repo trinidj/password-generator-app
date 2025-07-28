@@ -15,12 +15,16 @@
     padding: 1rem;
     width: 100%;
     max-width: 700px;
-    margin: 0 auto;
+    margin: 0 auto; 
   }
 
   header {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  header > h1 {
+    font-size: var(--text-2xl);
   }
 </style>
