@@ -10,7 +10,7 @@
     <Display />
 
     <!-- Password Settings Section -->
-     <!-- <Settings /> -->
+    <Settings />
   </Layout>
 </template>
 
