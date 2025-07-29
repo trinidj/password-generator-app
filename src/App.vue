@@ -8,7 +8,6 @@
   <Layout>
     <!-- Password Display Section -->
     <Display />
-
     <!-- Password Settings Section -->
     <Settings />
   </Layout>
