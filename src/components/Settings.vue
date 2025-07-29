@@ -1,9 +1,23 @@
 <script setup>
   import { Settings } from 'lucide-vue-next';
   import Slider from './ui/Slider.vue';
-  import { ref } from 'vue';
+  import { passwordGenerator } from './utils/helpers/passwordGenerator';
+  import { ref, watch } from 'vue';
+  
 
+  const password = ref('');
   const passwordLength = ref(8);
+  
+  const generateNewPassword = () => {
+    let result = passwordGenerator(passwordLength);
+    password.value = result;
+  }
+
+  watch(passwordLength, () => {
+    generateNewPassword();
+  });
+
+  generateNewPassword();
 </script>
 
 <template>
@@ -11,7 +25,7 @@
     <div class="settings-header">
       <h3>
         <Settings 
-          :size="20"
+          :size="20"  
         />
         Password Settings
       </h3>
@@ -19,16 +33,19 @@
     </div>
 
     <div class="settings-container">
-      <div class="slider-container">
+      <div class="length-display">
         <label for="password-length">Password Length</label>
-        <Slider 
-          v-model="passwordLength" 
-          class="slider"
-        />
+        <input v-model="passwordLength" class="password-length-field" type="text">
       </div>
 
-      <div class="length-display">
-        <input v-model="passwordLength" class="password-length-field" type="number">         
+      <div class="slider-container">
+        <Slider 
+          v-model="passwordLength"
+          :min="8"
+          :max="64"
+          :step="1"
+          class="slider"
+        />         
       </div>
     </div>
   </section>
@@ -37,23 +54,31 @@
 <style scoped>
   .settings-container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     padding: var(--spacing-lg);
-    padding-top: 0;
-    gap: var(--spacing-sm);
-    justify-content: space-between;
   }
 
-  .slider-container {
+  .length-display {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-base);
   }
 
   .password-length-field {
-    border: none;
-    cursor: default;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    width: 10%;
     text-align: center;
+    border: none;
+    padding: var(--spacing-xs);
+    border-radius: 5px;
+  }
+
+  .password-length-field:focus {
+    outline: none;
+  }
+
+  label {
+    font-size: var(--text-sm);
+    color: hsl(from var(--text-color) h s calc(l - 10) / 0.5);
   }
 </style>

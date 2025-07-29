@@ -84,4 +84,5 @@ section {
 .display-header p,
 .settings-header p {
   color: hsl(from var(--text-color) h s calc(l - 10) / 0.5);
+  font-size: var(--text-base);
 }

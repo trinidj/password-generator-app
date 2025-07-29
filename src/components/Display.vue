@@ -5,9 +5,10 @@
   import { ref } from 'vue';
 
   const password = ref('');
+  const currentLength = ref(8);
 
-  const generatePassword  = () => {
-    password.value = passwordGenerator();
+  const generatePassword = () => {
+    password.value = passwordGenerator(currentLength.value);
   }
 
   const copyToClipboard = async () => {
