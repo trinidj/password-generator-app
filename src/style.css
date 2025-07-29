@@ -54,3 +54,34 @@
   font-size: 16px;
   font-family: 'Ubuntu', sans-serif;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+section {
+  border-radius: 10px;
+  background-color: var(--base-color);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.display-header, 
+.settings-header {
+  padding: var(--spacing-lg);
+}
+
+.display-header h3,
+.settings-header h3 {
+  color: var(--text-color);
+  font-size: var(--text-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.display-header p,
+.settings-header p {
+  color: hsl(from var(--text-color) h s calc(l - 10) / 0.5);
+}
