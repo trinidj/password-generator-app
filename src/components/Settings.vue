@@ -1,6 +1,9 @@
 <script setup>
   import { Settings } from 'lucide-vue-next';
   import Slider from './ui/Slider.vue';
+  import { ref } from 'vue';
+
+  const passwordLength = ref(8);
 </script>
 
 <template>
@@ -17,11 +20,15 @@
 
     <div class="settings-container">
       <div class="slider-container">
-        <Slider class="slider"/>
+        <label for="password-length">Password Length</label>
+        <Slider 
+          v-model="passwordLength" 
+          class="slider"
+        />
       </div>
 
       <div class="length-display">
-        <input class="password-length-field" type="number">         
+        <input v-model="passwordLength" class="password-length-field" type="number">         
       </div>
     </div>
   </section>
@@ -38,10 +45,15 @@
     justify-content: space-between;
   }
 
+  .slider-container {
+    display: flex;
+    flex-direction: column;
+  }
+
   .password-length-field {
     border: none;
     cursor: default;
     padding: var(--spacing-xs) var(--spacing-sm);
-    width: 15%;
+    text-align: center;
   }
 </style>
