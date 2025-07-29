@@ -51,38 +51,15 @@
 </template>
 
 <style scoped>
-  #password-section {
-    border-radius: 10px;
-    background-color: var(--base-color);
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  }
-
   .password-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: var(--spacing-lg);
     padding-top: 0;
-    border-radius: 25px;
     gap: var(--spacing-sm);
     justify-content: space-between;
     
-  }
-
-  .display-header {
-    padding: var(--spacing-lg);
-  }
-
-  .display-header > h3 {
-    color: var(--text-color);
-    font-size: var(--text-lg);
-    display: flex;
-    align-items:center;
-    gap: var(--spacing-sm);
-  }
-
-  .display-header > p {
-    color: hsl(from var(--text-color) h s calc(l - 10) / 0.5);
   }
 
   .password-display, 
