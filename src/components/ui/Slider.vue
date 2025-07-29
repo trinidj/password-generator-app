@@ -1,9 +1,20 @@
-<template>
-  <input class="slider" type="range" min="8" max="64" />
-</template>
+<script setup>  
+  defineProps(['modelValue']);
+  const emit = defineEmits(['update:modelValue']);
 
-<style scoped>
-  .slider {
-    width: 75%;
+  function updatePasswordLength(event) {
+    const newLength = event.target.value;
+    emit('update:modelValue', newLength);  
   }
-</style>
+</script>
+
+<template>
+  <input 
+    class="slider" 
+    type="range" 
+    min="8" 
+    max="64" 
+    :value="modelValue"
+    @input="updatePasswordLength" 
+  />
+</template>
