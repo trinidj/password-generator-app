@@ -1,6 +1,7 @@
 <script setup>
+  import Slider from '@/components/ui/Slider.vue'; 
+  import Checkbox from '@/components/ui/Checkbox.vue';
   import { Settings } from 'lucide-vue-next';
-  import Slider from './ui/Slider.vue';
   import { ref, watchEffect } from 'vue';
 
   const props = defineProps({
@@ -51,11 +52,25 @@
           class="slider"
         />         
       </div>
+
+      <div class="options-container">
+        <Checkbox title="Uppercase"/>
+        <Checkbox title="Lowercase"/>
+        <Checkbox title="Digits (0-9)"/>
+        <Checkbox title="Special Characters"/>
+      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
+  .options-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+  }
+
   .settings-container {
     display: flex;
     flex-direction: column;
