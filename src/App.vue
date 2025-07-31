@@ -1,31 +1,29 @@
 <script setup>
-  import Layout from './components/layout/Layout.vue';
-  import Display from './components/Display.vue';
-  import Settings from './components/Settings.vue';
+  import Layout from '@/components/layout/Layout.vue';
+  import PasswordDisplay from '@/components/PasswordDisplay.vue';
+  import { passwordGenerator } from '@/components/utils/helpers/passwordGenerator';
   import { ref } from 'vue';
 
   const passwordLength = ref(8);
-  const password = ref('');
+  const generatedPassword = ref('');
 
-  const handleLengthChange = (newLength) => {
-    passwordLength.value = newLength;
-  };
-
-  const handlePasswordGenerated = (newPassword) => {
-    password.value = newPassword;
+  const handlePasswordGenerated = () => {
+    generatedPassword.value = passwordGenerator(passwordLength.value);
   };
 </script>
 
 <template>
   <Layout>
     <!-- Password Display Section -->
-    <Display :password="password"/>
+    <PasswordDisplay 
+      :password="generatedPassword"
+      @generate-password="handlePasswordGenerated"  
+    />
     <!-- Password Settings Section -->
-    <Settings 
+    <!-- <PasswordSettings 
       :password-length="passwordLength"
       @length-changed="handleLengthChange"
-      @password-generate="handlePasswordGenerated"
-    />
+    /> -->
   </Layout>
 </template>
 

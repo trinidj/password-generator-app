@@ -11,14 +11,9 @@
     }
   });
 
-  const emit = defineEmits(['length-changed', 'password-generate']);
+  const emit = defineEmits(['length-changed']);
 
   const setPasswordLength = ref(props.passwordLength);
-  
-  const generateNewPassword = () => {
-    let result = passwordGenerator(setPasswordLength.value);
-    emit('password-generate', result);
-  }
 
   watchEffect(() => {
     emit('length-changed', setPasswordLength.value);

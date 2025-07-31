@@ -1,16 +1,18 @@
 <script setup>
-  import Button from './ui/Button.vue';
-  import PasswordDisplay from './ui/PasswordDisplay.vue';
+  import Button from '@/components/ui/Button.vue';
   import { Copy, RefreshCw, Key } from 'lucide-vue-next';
-  import { passwordGenerator } from './utils/helpers/passwordGenerator';
 
   const props = defineProps({
-    password: String, default: ''
-  });
+    password: {
+      type: String,
+      default: ''
+    }
+  })
+
+  const emit = defineEmits(['generate-password']);
   
   const generatePassword = () => {
-    const newPassword = passwordGenerator();
-    emit('generate-password', newPassword);
+    emit('generate-password');
   };
 
   const copyToClipboard = async () => {
@@ -32,7 +34,7 @@
 
     <div class="password-container">
       <div class="password-display">
-        <PasswordDisplay :password="props.password"/>
+        <p>{{ props.password || 'Click Generate to Create a Password' }}</p>
       </div>
 
       <div class="button-row">
