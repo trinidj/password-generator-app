@@ -46,7 +46,7 @@
         <Slider 
           v-model="setPasswordLength"
           :min="8"
-          :max="64"
+          :max="32"
           :step="1"
           class="slider"
         />         
