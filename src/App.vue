@@ -13,7 +13,7 @@
   };
 
   const handleLengthChange = (newLength) => {
-   passwordLength.value = newLength;
+    passwordLength.value = newLength;
   };
 </script>
 
