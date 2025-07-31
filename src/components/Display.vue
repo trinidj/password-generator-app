@@ -1,19 +1,21 @@
 <script setup>
   import Button from './ui/Button.vue';
-  import { passwordGenerator } from './utils/helpers/passwordGenerator';
+  import PasswordDisplay from './ui/PasswordDisplay.vue';
   import { Copy, RefreshCw, Key } from 'lucide-vue-next';
-  import { ref } from 'vue';
+  import { passwordGenerator } from './utils/helpers/passwordGenerator';
 
-  const password = ref('');
-  const currentLength = ref(8);
-
+  const props = defineProps({
+    password: String, default: ''
+  });
+  
   const generatePassword = () => {
-    password.value = passwordGenerator(currentLength.value);
-  }
+    const newPassword = passwordGenerator();
+    emit('generate-password', newPassword);
+  };
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(password.value);
-  }
+    await navigator.clipboard.writeText(props.password);
+  };
 </script>
 
 <template>
@@ -30,7 +32,7 @@
 
     <div class="password-container">
       <div class="password-display">
-        <p>{{ password || 'No password generated yet' }}</p>
+        <PasswordDisplay :password="props.password"/>
       </div>
 
       <div class="button-row">
@@ -41,8 +43,7 @@
         </Button>
 
         <Button @click="generatePassword" class="generate-button">
-          <RefreshCw
-            color="#fff" 
+          <RefreshCw 
             :size="20"
           />
         </Button>

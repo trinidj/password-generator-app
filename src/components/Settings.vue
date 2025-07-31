@@ -2,22 +2,28 @@
   import { Settings } from 'lucide-vue-next';
   import Slider from './ui/Slider.vue';
   import { passwordGenerator } from './utils/helpers/passwordGenerator';
-  import { ref, watch } from 'vue';
-  
+  import { ref, watchEffect } from 'vue';
 
-  const password = ref('');
-  const passwordLength = ref(8);
-  
-  const generateNewPassword = () => {
-    let result = passwordGenerator(passwordLength);
-    password.value = result;
-  }
-
-  watch(passwordLength, () => {
-    generateNewPassword();
+  const props = defineProps({
+    passwordLength: {
+      type: Number,
+      default: 8
+    }
   });
 
-  generateNewPassword();
+  const emit = defineEmits(['length-changed', 'password-generate']);
+
+  const setPasswordLength = ref(props.passwordLength);
+  
+  const generateNewPassword = () => {
+    let result = passwordGenerator(setPasswordLength.value);
+    emit('password-generate', result);
+  }
+
+  watchEffect(() => {
+    emit('length-changed', setPasswordLength.value);
+    // generateNewPassword();
+  });
 </script>
 
 <template>
@@ -35,12 +41,12 @@
     <div class="settings-container">
       <div class="length-display">
         <label for="password-length">Password Length</label>
-        <input v-model="passwordLength" class="password-length-field" type="text">
+        <input v-model="setPasswordLength" class="password-length-field" type="text">
       </div>
 
       <div class="slider-container">
         <Slider 
-          v-model="passwordLength"
+          v-model="setPasswordLength"
           :min="8"
           :max="64"
           :step="1"
