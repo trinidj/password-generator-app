@@ -1,6 +1,7 @@
 <script setup>
   import Layout from '@/components/layout/Layout.vue';
   import PasswordDisplay from '@/components/PasswordDisplay.vue';
+  import PasswordSettings from '@/components/PasswordSettings.vue';
   import { passwordGenerator } from '@/components/utils/helpers/passwordGenerator';
   import { ref } from 'vue';
 
@@ -9,6 +10,10 @@
 
   const handlePasswordGenerated = () => {
     generatedPassword.value = passwordGenerator(passwordLength.value);
+  };
+
+  const handleLengthChange = (newLength) => {
+   passwordLength.value = newLength;
   };
 </script>
 
@@ -20,10 +25,11 @@
       @generate-password="handlePasswordGenerated"  
     />
     <!-- Password Settings Section -->
-    <!-- <PasswordSettings 
+    <PasswordSettings 
       :password-length="passwordLength"
+      @generate-password="handlePasswordGenerated"
       @length-changed="handleLengthChange"
-    /> -->
+    />
   </Layout>
 </template>
 
