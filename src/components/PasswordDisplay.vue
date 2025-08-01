@@ -1,6 +1,7 @@
 <script setup>
   import Button from '@/components/ui/Button.vue';
-  import { Copy, RefreshCw, ShieldCheck, ShieldAlert } from 'lucide-vue-next';
+  import { Copy, RefreshCw, ShieldCheck, ShieldAlert, ShieldOff } from 'lucide-vue-next';
+  import { ref } from 'vue';
 
   const props = defineProps({
     password: {
@@ -34,17 +35,23 @@
         <div class="password-status">
           <div v-if="props.passwordLength >= 12" class="strong-password">
             <ShieldCheck 
+              :stroke-width="2.5"
+              :class="{ 'text-strong': true }"
               :size="20"
             />
-            <p>Strong Password</p>
           </div>
 
           <div v-else class="moderate-password">
-            <ShieldAlert 
+            <ShieldAlert
+              stroke-width="2.5"
+              :class="{ 'text-moderate': true }" 
               :size="20"
             />
-            <p>Moderate Password</p>
           </div>
+
+          <p :class="props.passwordLength >= 12 ? 'text-strong' : 'text-moderate'">
+            {{ props.passwordLength >= 12 ? 'Strong' : 'Moderate' }}
+          </p>
         </div>
 
         <div class="password-actions">
@@ -82,16 +89,24 @@
     font-weight: 500;
   }
 
-  .strong-password p,
-  .moderate-password p {
-    color: var(--text-color);
-    font-size: var(--text-sm);
+  .text-strong {
+    color: #38a169; 
+  }
+
+  .text-moderate {
+    color: #d69e2e; 
+  }
+
+  .text-strong, 
+  .text-moderate {
+    font-weight: 500;
   }
 
   .password-utilities,
   .password-status {
     display: flex;
     align-items: center;
+    gap: var(--spacing-sm);
   }
 
   .password-utilities {
@@ -111,7 +126,8 @@
   }
 
   .password-display p {
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
+    color: var(--text-color);
   }
 
   .password-actions {
