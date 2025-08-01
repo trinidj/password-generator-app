@@ -2,18 +2,29 @@
   import Slider from '@/components/ui/Slider.vue'; 
   import Checkbox from '@/components/ui/Checkbox.vue';
   import { Settings } from 'lucide-vue-next';
-  import { ref, watchEffect } from 'vue';
+  import { ref, watchEffect, reactive } from 'vue';
 
   const props = defineProps({
     passwordLength: {
       type: Number,
       default: 8
-    }
+    },
+    checked: {
+      type: Boolean,
+      default: false,
+    },
   });
 
   const emit = defineEmits(['length-changed', 'generate-password']);
 
   const setPasswordLength = ref(props.passwordLength);
+
+  const checkboxOptions = ref({
+    uppercase: true,
+    lowercase: true,
+    digits: true,
+    symbols: true
+  });
 
   const generatePassword = () => {
     emit('generate-password');
@@ -54,10 +65,10 @@
       </div>
 
       <div class="options-container">
-        <Checkbox title="Uppercase"/>
-        <Checkbox title="Lowercase"/>
-        <Checkbox title="Digits (0-9)"/>
-        <Checkbox title="Special Characters"/>
+        <Checkbox v-model="checkboxOptions.uppercase" title="Uppercase" />
+        <Checkbox v-model="checkboxOptions.lowercase" title="Lowercase"/>
+        <Checkbox v-model="checkboxOptions.digits" title="Digits (0-9)"/>
+        <Checkbox v-model="checkboxOptions.symbols" title="Special Characters"/>
       </div>
     </div>
   </section>
