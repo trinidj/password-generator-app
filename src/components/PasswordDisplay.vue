@@ -1,7 +1,6 @@
 <script setup>
   import Button from '@/components/ui/Button.vue';
   import { Copy, RefreshCw, ShieldCheck, ShieldAlert, ShieldOff } from 'lucide-vue-next';
-  import { ref } from 'vue';
 
   const props = defineProps({
     password: {
@@ -35,7 +34,7 @@
         <div class="password-status">
           <div v-if="props.passwordLength >= 12" class="strong-password">
             <ShieldCheck 
-              :stroke-width="2.5"
+              stroke-width="2.5"
               :class="{ 'text-strong': true }"
               :size="20"
             />
