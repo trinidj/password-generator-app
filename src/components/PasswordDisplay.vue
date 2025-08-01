@@ -1,13 +1,16 @@
 <script setup>
   import Button from '@/components/ui/Button.vue';
-  import { Copy, RefreshCw, Key } from 'lucide-vue-next';
+  import { Copy, RefreshCw, ShieldCheck, ShieldAlert } from 'lucide-vue-next';
 
   const props = defineProps({
     password: {
       type: String,
       default: ''
-    }
-  })
+    },
+    passwordLength: {
+      type: Number,
+    },
+  });
 
   const emit = defineEmits(['generate-password']);
   
@@ -22,33 +25,37 @@
 
 <template>
   <section id="password-section">
-    <div class="display-header">
-      <h3>
-        <Key 
-          :size="20"
-        />
-        Generated Password
-      </h3>
-      <p>Copy your generated password</p>
-    </div>
-
     <div class="password-container">
       <div class="password-display">
         <p>{{ props.password || 'Click Generate to Create a Password' }}</p>
       </div>
 
-      <div class="button-row">
-        <Button @click="copyToClipboard" class="copy-button">
-          <Copy 
-            :size="20"
-          />
-        </Button>
+      <div class="password-utilities">
+        <div class="password-status">
+          <div class="strong-password">
+            <ShieldCheck 
+              v-if="props.passwordLength >= 12"
+            />
+          </div>
 
-        <Button @click="generatePassword" class="generate-button">
-          <RefreshCw 
-            :size="20"
-          />
-        </Button>
+          <div class="moderate-password">
+            <ShieldAlert />
+          </div>
+        </div>
+
+        <div class="password-actions">
+          <Button @click="copyToClipboard" class="copy-button">
+            <Copy 
+              :size="16"
+            />
+          </Button>
+
+          <Button @click="generatePassword" class="generate-button">
+            <RefreshCw 
+              :size="16"
+            />
+          </Button>
+        </div>
       </div>
     </div>
   </section>
@@ -57,32 +64,39 @@
 <style scoped>
   .password-container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     padding: var(--spacing-lg);
-    padding-top: 0;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-3xl);
     justify-content: space-between;
-    
   }
 
-  .password-display, 
-  .button-row {
+  .password-utilities,
+  .password-status {
+    display: flex;
     align-items: center;
   }
 
-  .password-display > input {
+  .password-utilities {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .password-display input {
     border: none;
     cursor: default;
     padding: var(--spacing-base);
     background: var(--base-color);
   }
 
-  .password-display > input:focus {
+  .password-display input:focus {
     outline: none;
   }
 
-  .button-row {
+  .password-display p {
+    font-size: var(--text-xl);
+  }
+
+  .password-actions {
     display: flex;
     gap: var(--spacing-sm);
   }
