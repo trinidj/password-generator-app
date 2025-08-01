@@ -2,7 +2,7 @@
   import Slider from '@/components/ui/Slider.vue'; 
   import Checkbox from '@/components/ui/Checkbox.vue';
   import { Settings } from 'lucide-vue-next';
-  import { ref, watchEffect, reactive } from 'vue';
+  import { ref, watchEffect } from 'vue';
 
   const props = defineProps({
     passwordLength: {
@@ -15,7 +15,11 @@
     },
   });
 
-  const emit = defineEmits(['length-changed', 'generate-password']);
+  const emit = defineEmits([
+    'length-changed', 
+    'generate-password', 
+    'options-changed'
+  ]);
 
   const setPasswordLength = ref(props.passwordLength);
 
@@ -33,6 +37,17 @@
   watchEffect(() => {
     emit('length-changed', setPasswordLength.value);
     generatePassword();
+  });
+
+  watchEffect(() => {
+    const options = {
+      hasAlpha: checkboxOptions.value.uppercase || checkboxOptions.value.lowercase,
+      casing: checkboxOptions.value.uppercase && checkboxOptions.value.lowercase ? 'mixed' : 
+              checkboxOptions.value.uppercase ? 'upper' : 'lower',
+      hasDigits: checkboxOptions.value.digits,
+      hasSymbols: checkboxOptions.value.symbols
+    };
+    emit('options-changed', options);
   });
 </script>
 
