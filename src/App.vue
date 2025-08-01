@@ -22,6 +22,7 @@
     <!-- Password Display Section -->
     <PasswordDisplay 
       :password="generatedPassword"
+      :passwordLength="passwordLength"
       @generate-password="handlePasswordGenerated"  
     />
     <!-- Password Settings Section -->
