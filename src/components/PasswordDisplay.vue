@@ -1,6 +1,6 @@
 <script setup>
   import Button from '@/components/ui/Button.vue';
-  import { Copy, RefreshCw, ShieldCheck, ShieldAlert, ShieldOff } from 'lucide-vue-next';
+  import { Copy, RefreshCw, ShieldCheck, ShieldAlert } from 'lucide-vue-next';
 
   const props = defineProps({
     password: {
