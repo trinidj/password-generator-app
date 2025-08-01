@@ -1,12 +1,15 @@
 import { Chance } from "chance";
 
-export function passwordGenerator(length) {
+export function passwordGenerator(length, hasAlpha, casing, hasSymbols) {
   const chance = new Chance();
 
   let password = '';
-  for (let i = 0; i < length; i++) {
-    password += chance.character();
-  }
+  password += chance.string({
+    length: length,
+    alpha: hasAlpha,
+    casing: casing,
+    symbols: hasSymbols,
+  });
 
   return password;
 }
