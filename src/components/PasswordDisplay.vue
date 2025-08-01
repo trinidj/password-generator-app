@@ -32,14 +32,18 @@
 
       <div class="password-utilities">
         <div class="password-status">
-          <div class="strong-password">
+          <div v-if="props.passwordLength >= 12" class="strong-password">
             <ShieldCheck 
-              v-if="props.passwordLength >= 12"
+              :size="20"
             />
+            <p>Strong Password</p>
           </div>
 
-          <div class="moderate-password">
-            <ShieldAlert />
+          <div v-else class="moderate-password">
+            <ShieldAlert 
+              :size="20"
+            />
+            <p>Moderate Password</p>
           </div>
         </div>
 
@@ -68,6 +72,20 @@
     padding: var(--spacing-lg);
     gap: var(--spacing-3xl);
     justify-content: space-between;
+  }
+
+  .strong-password,
+  .moderate-password {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: 500;
+  }
+
+  .strong-password p,
+  .moderate-password p {
+    color: var(--text-color);
+    font-size: var(--text-sm);
   }
 
   .password-utilities,
