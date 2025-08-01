@@ -57,12 +57,14 @@
         <div class="password-actions">
           <Button @click="copyToClipboard" class="copy-button">
             <Copy 
+              :stroke-width="2.5"
               :size="16"
             />
           </Button>
 
           <Button @click="generatePassword" class="generate-button">
-            <RefreshCw 
+            <RefreshCw
+              :stroke-width="2.5" 
               :size="16"
             />
           </Button>
