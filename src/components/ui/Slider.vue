@@ -1,9 +1,9 @@
 <script setup>
   defineProps({
     modelValue: [String, Number],
-    min: { type: [String, Number], default: 8 },
-    max: { type: [String, Number], default: 64 },
-    step: { type: [String, Number], default: 1},
+    min: { type: [String, Number] },
+    max: { type: [String, Number]  },
+    step: { type: [String, Number] },
   });
 
   defineEmits(['update:modelValue']);
@@ -17,7 +17,7 @@
     :max="max"
     :step="step"
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="$emit('update:modelValue', Number($event.target.value))"
   />
 </template>
 
