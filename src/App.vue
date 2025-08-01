@@ -7,14 +7,33 @@
 
   const passwordLength = ref(8);
   const generatedPassword = ref('');
+  const passwordOptions = ref({
+    hasAlpha: true,
+    casing: 'mixed',
+    hasDigits: true,
+    hasSymbols: true
+  });
 
   const handlePasswordGenerated = () => {
-    generatedPassword.value = passwordGenerator(passwordLength.value);
+    generatedPassword.value = passwordGenerator(
+      passwordLength.value,
+      passwordOptions.value.hasAlpha,
+      passwordOptions.value.casing,
+      passwordOptions.value.hasSymbols
+    );
   };
 
   const handleLengthChange = (newLength) => {
     passwordLength.value = newLength;
   };
+
+  const handleOptionChange = (newOptions) => {
+    passwordOptions.value = {
+      ...passwordOptions.value, 
+      ...newOptions,
+    };
+  };
+
 </script>
 
 <template>
@@ -30,6 +49,7 @@
       :password-length="passwordLength"
       @generate-password="handlePasswordGenerated"
       @length-changed="handleLengthChange"
+      @options-changed="handleOptionChange"
     />
   </Layout>
 </template>
