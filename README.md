@@ -31,8 +31,8 @@ This project helped develop skills in:
 - Clipboard API
 
 ## 📚 Libraries Used
-- [Lucide](https://lucide.dev/ "Lucide Icon Library")
-- [Chance](https://chancejs.com/ "ChanceJS")
+- [Lucide Icon Library](https://lucide.dev/ "Lucide Icon Library")
+- [ChanceJS](https://chancejs.com/ "ChanceJS")
 
 ## 📦 Installation
 
