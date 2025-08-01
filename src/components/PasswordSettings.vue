@@ -109,6 +109,7 @@
     display: flex;
     flex-direction: column;
     padding: var(--spacing-lg);
+    padding-top: 0;
   }
 
   .length-display {
