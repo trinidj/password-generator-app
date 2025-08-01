@@ -40,12 +40,20 @@
   });
 
   watchEffect(() => {
+    const { uppercase, lowercase, digits, symbols } = checkboxOptions.value;
+
+    const getCasing = () => {
+      if (uppercase && lowercase) return 'mixed';
+      if (uppercase) return 'upper'
+
+      return 'lower';
+    }
+
     const options = {
-      hasAlpha: checkboxOptions.value.uppercase || checkboxOptions.value.lowercase,
-      casing: checkboxOptions.value.uppercase && checkboxOptions.value.lowercase ? 'mixed' : 
-              checkboxOptions.value.uppercase ? 'upper' : 'lower',
-      hasDigits: checkboxOptions.value.digits,
-      hasSymbols: checkboxOptions.value.symbols
+      hasAlpha: uppercase || lowercase,
+      casing: getCasing(),
+      hasDigits: digits,
+      hasSymbols: symbols,
     };
     emit('options-changed', options);
   });
